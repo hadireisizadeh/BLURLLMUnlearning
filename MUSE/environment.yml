@@ -1,4 +1,4 @@
-name: muse_env
+name: muse_env 
 channels:
   - defaults
 dependencies:

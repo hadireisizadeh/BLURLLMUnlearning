@@ -7,7 +7,7 @@ Enabling large language models (LLMs) to unlearn knowledge and capabilities acqu
 
 ## Installation
 ### MUSE
-You can install the required dependencies using the following command:
+You can install the required dependencies using the following command
 ```
 conda env create -f environment.yml
 conda activate muse_env

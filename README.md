@@ -7,14 +7,14 @@ Enabling large language models (LLMs) to unlearn knowledge and capabilities acqu
 
 ## ⚙️ Installation  
 ### **MUSE Environment** 
-To set up the **MUSE** environment, run:
+To set up the MUSE environment, run:
 ```sh
 conda env create -f environment.yml
 conda activate muse_env
 ```
 
 ### **WMDP Environment**  
-For the **WMDP** environment, follow these steps:
+For the WMDP environment, follow these steps:
 ```sh
 conda create -n wmdp_env python=3.9.21 -y
 conda activate wmdp_env

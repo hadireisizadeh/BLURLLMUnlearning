@@ -1,4 +1,4 @@
-# BLUR-A-Bi-Level-Optimization-Approach-for-LLM-Unlearning
+# BLUR: A Bi-Level Optimization Approach for LLM Unlearning
 
 
 ## 🚀 Abstract 

@@ -12,3 +12,16 @@ You can install the required dependencies using the following command
 conda env create -f environment.yml
 conda activate muse_env
 ```
+
+### WMDP
+```
+conda create -n wmdp_env python=3.9.21 -y
+conda activate wmdp_env
+conda install pytorch=2.1.1 torchvision=0.16.1 torchaudio=2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y
+pip install datasets==3.2.0 wandb==0.19.2 transformers==4.37.2 sentencepiece==0.1.99 sentence-transformers==2.5.1
+pip install terminaltables==3.1.10 sacrebleu==2.4.0 rouge-score==0.1.2 matplotlib==3.8.3 seaborn==0.13.2 scikit-learn==1.4.0
+git clone https://github.com/EleutherAI/lm-evaluation-harness.git
+cd lm-evaluation-harness
+pip install -e .
+```
+

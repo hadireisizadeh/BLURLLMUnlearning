@@ -1,5 +1,4 @@
 import json
-
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import random
@@ -161,19 +160,11 @@ class SAMAdamW(AdamW):
 
     @torch.no_grad()
     def step(self, closure) -> torch.Tensor:
-        """
-        closure 为一个长度为2的 list/tuple: [closure_forget, closure_retain]
-        先在模型上用 closure_forget 计算基本梯度(并得到epsilon)，
-        再在扰动后模型上再次调用 closure_forget 获取 forget 梯度，
-        恢复模型后调用 closure_retain 获取 retain 梯度，
-        再将二者合并后执行一次更新。
-        """
         # print("This is SAM!")
         closure_forget = torch.enable_grad()(closure[0])
         closure_retain = torch.enable_grad()(closure[1])
 
-        # ---------- 第 1 步: 用 closure_forget 计算基本梯度 ----------
-        self.zero_grad()  # 使用父类默认的 zero_grad()
+        self.zero_grad() 
         closure_forget().detach()
         # print(f"Forget loss: {loss_forget}")
         for group in self.param_groups:
@@ -206,10 +197,7 @@ class SAMAdamW(AdamW):
                 for p in params_with_grads
             ]
 
-            # ---------- 第 4 步: 恢复模型（移除扰动） ----------
             torch._foreach_sub_(params_with_grads, epsilon)
-
-            # ---------- 第 5 步: 用 closure_retain 获取 retain 梯度 ----------
             self.zero_grad()
             loss_retain = closure_retain()  # forward + backward on original model
             retain_grads = [
@@ -217,13 +205,11 @@ class SAMAdamW(AdamW):
                 for p in params_with_grads
             ]
 
-            # ---------- 第 6 步: 合并两者梯度 (简单相加) ----------
             for i, p in enumerate(params_with_grads):
                 fg = forget_perturbed_grads[i]
                 rg = self.gamma * retain_grads[i]
                 p.grad.copy_(fg + rg)
 
-        # ---------- 第 7 步: 执行一次更新 ----------
         # clip_grad_norm_(params_with_grads, 1.0)
         super().step()
         loss = loss_forget + self.gamma * loss_retain

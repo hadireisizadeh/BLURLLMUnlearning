@@ -58,7 +58,7 @@ done
 
 ### **Running WMDP**  
 
-To execute WMDP, use the following command:  
+To execute the WMDP experiments, use the following command:  
 
 ```sh
 CUDA_VISIBLE_DEVICES=0 python3 -m rmu.unlearn_bi \

@@ -73,8 +73,6 @@ CUDA_VISIBLE_DEVICES=0 python3 -m rmu.unlearn_bi \
 
 ## 🐝 Citation  
 
-If you use `BLUR` in your research, please cite our work:
-
 ```bibtex
 @article{BLUR2024,
   author    = {Your Name and Collaborators},
